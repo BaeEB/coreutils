@@ -1,0 +1,50 @@
+name: regression test
+
+on:
+    # push:
+    workflow_dispatch:
+            
+jobs:
+    checkout:
+        runs-on: self-hosted
+        steps:
+            - name: checkout source code
+              uses: actions/checkout@v2
+    build:
+        needs: checkout
+        runs-on: self-hosted
+        steps:
+            - name: run build
+              run: |
+                    ./bootstrap
+                    ./configure
+                    make clean
+                    make -j10
+    test:
+        needs: build
+        runs-on: self-hosted
+        steps:
+            - name: run test
+              run: |
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 1)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 2)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 3)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 4)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 5)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 6)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 7)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 205)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 206)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 207)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 208)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 209)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 210)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 211)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 212)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 213)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 214)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 215)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 216)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 217)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 218)
+                    make check-TESTS --no-print-directory TESTS=$(make print-TESTS | cut -d ' ' -f 219)
